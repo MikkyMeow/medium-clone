@@ -4,22 +4,25 @@ import useFetch from './../../hooks/useFetch';
 
 const Auth = (props) => {
   const isLogin = props.match.path === '/login';
+  const pageTitle = isLogin ? 'Sign In' : 'Sign Up';
+  const descriptionLink = isLogin ? '/register' : '/login';
+  const descriptionText = isLogin ? 'Need an account?' : 'Have an account?';
+  const apiUrl = isLogin ? '/users/login' : '/users';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [{response, isLoading, error}, doFetch] = useFetch('/users/login');
+  const [username, setUsername] = useState('');
+  const [{response, isLoading, error}, doFetch] = useFetch(apiUrl);
 
   console.log('props', isLogin)
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('data', email, password);
+    const user = isLogin ? {email, password} : {username, email, password};
+    console.log('data', user);
     doFetch({
       method: 'post',
       data: {
-        user: {
-          email: 'qq@qq.com',
-          password: '123',
-        }
+        user
       }
     })
   }
@@ -29,23 +32,22 @@ const Auth = (props) => {
       <div className='container page'>
         <div className='row'>
           <div className='col-md-6 offset-md-3 col-xs-12'>
-            <h1 className='text-xs-center'>Login</h1>
+            <h1 className='text-xs-center'>{pageTitle}</h1>
             <p className='text-xs-center'>
-              <Link to='register'>Need an account?</Link>
+              <Link to={descriptionLink}>{descriptionText}</Link>
             </p>
             <form onSubmit={handleSubmit}>
               <fieldset>
+                {!isLogin && <fieldset className='form-group'>
+                  <input type='text' className='form-control form-control-lg' placeholder='Username' value={username} onChange={e => setUsername(e.target.value)} />
+                </fieldset>}
                 <fieldset className='form-group'>
                   <input type='email' className='form-control form-control-lg' placeholder='Email' value={email} onChange={e => setEmail(e.target.value)} />
                 </fieldset>
                 <fieldset className='form-group'>
                   <input type='password' className='form-control form-control-lg' placeholder='Password' value={password} onChange={e => setPassword(e.target.value)} />
                 </fieldset>
-                <button className='btn btn-lg btn-primary pull-xs-right' type='submit' disabled={isLoading}>Sign In</button>
-                {props.location.pathname === '/register' && <fieldset className='form-group'>
-                  <input type='email' className='form-control form-control-lg' placeholder='Email' />
-
-                </fieldset>}
+                <button className='btn btn-lg btn-primary pull-xs-right' type='submit' disabled={isLoading}>{pageTitle}</button>
               </fieldset>
             </form>
           </div>

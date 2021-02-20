@@ -13,7 +13,7 @@ const Auth = (props) => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [isSuccessfullSubmit, setIsSuccessfullSubmit] = useState(false);
-  const [{response, isLoading, error}, doFetch] = useFetch(apiUrl);
+  const [{response, isLoading}, doFetch] = useFetch(apiUrl);
   const [token, setToken] = useLocalStorage('token');
 
   console.log('token', token)
@@ -34,7 +34,7 @@ const Auth = (props) => {
     if (!response) return
     setToken(response.user.token);
     setIsSuccessfullSubmit(true);
-  }, [response]);
+  }, [response, setToken]); 
 
   if (isSuccessfullSubmit) {
     return <Redirect to='/' />

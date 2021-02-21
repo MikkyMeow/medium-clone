@@ -17,8 +17,10 @@ const Auth = (props) => {
   const [isSuccessfullSubmit, setIsSuccessfullSubmit] = useState(false);
   const [{response, isLoading, error}, doFetch] = useFetch(apiUrl);
   const [, setToken] = useLocalStorage('token');
-  const [, setCurrentUserState] = useContext(CurrentUserContext);
+  const [CurrentUserState, setCurrentUserState] = useContext(CurrentUserContext);
 
+  console.log('current user state ', CurrentUserState);
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const user = isLogin ? {email, password} : {username, email, password};

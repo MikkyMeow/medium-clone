@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import ArticleForm from '../../components/ArticleForm';
 import useFetch from './../../hooks/useFetch';
 import { Redirect } from 'react-router-dom';
-import { CurrentUserContext, currentUserContext } from './../../contexts/currentUser';
+import { CurrentUserContext } from './../../contexts/currentUser';
 
 const CreateArticle = () => {
   const apiUrl = '/articles';

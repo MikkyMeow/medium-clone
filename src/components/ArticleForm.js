@@ -1,23 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import BackendErrorMessages from './BackendErrorMessages';
 
 const ArticleForm = ({ onSubmit, errors, initialValues }) => {
   const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
   const [description, setDescription] = useState('');
+  const [body, setBody] = useState('');
   const [tagList, setTagList] = useState('');
 
   const handleSubmit = event => {
     event.preventDefault();
-    onSubmit({foo: 'bar'});
-    console.log('enter', title, body, description, tagList);
+    const article = {
+      title,
+      description,
+      body,
+      tagList,
+    }
+    onSubmit(article);
   }
+
+  useEffect(() => {
+    if (!initialValues) return
+    setTitle(initialValues.title);
+    setDescription(initialValues.description);
+    setBody(initialValues.body);
+    setTagList(initialValues.tagList.join(', '));
+
+  }, [initialValues]);
   
   return (
     <div className="editor-page">
       <div className="container page">
         <div className="row">
           <div className="col-md-10 offset-md-1 col-xs-12">
-            BackendErrorMessages
+            {errors && (<BackendErrorMessages backendErrors={errors} />)}
             <form onSubmit={handleSubmit}>
               <fieldset>
                 <fieldset className="form-group">

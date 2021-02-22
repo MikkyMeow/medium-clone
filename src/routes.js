@@ -12,7 +12,7 @@ const Router = () => {
       <Route path='/' component={GlobalFeed} exact />
       <Route path='/feed' component={YourFeed} />
       <Route path='/tags/:slug' component={TagFeed} />
-      <Route path='/articles' component={Article} />
+      <Route path='/articles/:slug' component={Article} />
       <Route path='/login' component={Auth} />
       <Route parh='/register' component={Auth} />
     </Switch>

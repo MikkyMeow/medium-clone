@@ -22,7 +22,6 @@ const Auth = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const user = isLogin ? {email, password} : {username, email, password};
-    console.log('data', user);
     doFetch({
       method: 'post',
       data: {

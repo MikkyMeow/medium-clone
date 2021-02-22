@@ -12,16 +12,6 @@ const TopBar = () => {
           <li className='nav-item'>
             <NavLink to='/' className='nav-link' exact>Home</NavLink>
             </li>
-          {CurrentUserState.isLoggedIn === false && (
-            <Fragment>
-              <li className='nav-item'>
-                <NavLink to='/login' className='nav-link'>Sign In</NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink to='/register' className='nav-link'>Sign Up</NavLink>
-              </li>
-            </Fragment>
-          )}
           {CurrentUserState.isLoggedIn && (
             <Fragment>
               <li className='nav-item'>
@@ -35,6 +25,16 @@ const TopBar = () => {
                   <img className='user-pic' src={CurrentUserState.currentUser.image} alt='' />
                   &nbsp; {CurrentUserState.currentUser.username}
                 </NavLink>
+              </li>
+            </Fragment>
+          )}
+          {CurrentUserState.isLoggedIn === false && (
+            <Fragment>
+              <li className='nav-item'>
+                <NavLink to='/login' className='nav-link'>Sign In</NavLink>
+              </li>
+              <li className='nav-item'>
+                <NavLink to='/register' className='nav-link'>Sign Up</NavLink>
               </li>
             </Fragment>
           )}

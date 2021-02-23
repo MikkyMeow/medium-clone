@@ -42,7 +42,7 @@ const ArticleForm = ({ onSubmit, errors, initialValues }) => {
                   <input type="text" className='form-control form-control-lg' placeholder='What Is This Article About?' value={description} onChange={e => setDescription(e.target.value)} />
                 </fieldset>
                 <fieldset className="form-group">
-                  <textarea rows="8" className="form-control" placeholder='Write Your Article (in markdown)' value={body} onChange={e => setBody(e.target.value)} ></textarea>
+                  <textarea rows="8" className='form-control form-control-lg' placeholder='Write Your Article (in markdown)' value={body} onChange={e => setBody(e.target.value)} ></textarea>
                 </fieldset>
                 <fieldset className="form-group">
                   <input type="text" className='form-control form-control-lg' placeholder='Enter Text' value={tagList} onChange={e => setTagList(e.target.value)} />
